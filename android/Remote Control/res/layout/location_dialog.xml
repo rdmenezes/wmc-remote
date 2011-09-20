@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="vertical" android:layout_width="fill_parent"
+   android:layout_height="fill_parent">
+
+   <LinearLayout android:orientation="vertical"
+      android:layout_width="fill_parent" android:layout_height="fill_parent"
+      android:padding="8dip">
+
+      <TextView style="?android:attr/textAppearanceSmallInverse"
+         android:text="Name" android:id="@+id/location_name_text"
+         android:layout_width="fill_parent" android:layout_height="wrap_content" />
+      <EditText android:layout_height="wrap_content"
+         android:id="@+id/location_name_edit" android:layout_width="fill_parent"
+         android:singleLine="true" />
+
+      <TextView style="?android:attr/textAppearanceSmallInverse"
+         android:text="Address" android:id="@+id/location_address_text"
+         android:layout_width="fill_parent" android:layout_height="wrap_content" />
+      <EditText android:layout_height="wrap_content"
+         android:id="@+id/location_address_edit" android:layout_width="fill_parent"
+         android:singleLine="true" android:inputType="textUri" />
+         
+      <TextView style="?android:attr/textAppearanceSmallInverse"
+         android:text="Port" android:id="@+id/location_port_text"
+         android:layout_width="fill_parent" android:layout_height="wrap_content" />
+      <EditText android:layout_height="wrap_content"
+         android:id="@+id/location_port_edit" android:layout_width="fill_parent"
+         android:singleLine="true" android:inputType="number"/>
+         
+   </LinearLayout>
+
+</ScrollView>
