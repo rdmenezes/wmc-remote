@@ -84,7 +84,12 @@ public class LocationDialog extends AlertDialog implements TextWatcher {
 
       setView(_view);
       setInverseBackgroundForced(true);
-      setTitle("Add new location");
+      if (_location == null) {
+         setTitle("Add new location");
+      } else
+      {
+         setTitle("Edit location");
+      }
 
       _nameEdit = (EditText)_view.findViewById(R.id.location_name_edit);
       _addressEdit = (EditText)_view.findViewById(R.id.location_address_edit);
