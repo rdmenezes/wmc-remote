@@ -24,14 +24,12 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.remote.control.R;
 import com.remote.control.R.id;
 
 public class RemoteControlActivity extends Activity {
@@ -62,7 +60,6 @@ public class RemoteControlActivity extends Activity {
    @Override
    public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
       setContentView(R.layout.main);
       setupCodes();
       findViewById(id.launch_media_center).setOnClickListener(_onClickListener);
