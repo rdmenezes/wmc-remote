@@ -22,6 +22,9 @@
 LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/,
       LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
+   DoDataExchange(FALSE);
+   c_website.SetToolTipText(L"wmc-remote.googlecode.com");
+   c_website.SetHyperLink(L"http://wmc-remote.googlecode.com");
 	CenterWindow(GetParent());
 	return TRUE;
 }
