@@ -16,7 +16,7 @@
 
 #pragma once
 
-class CAboutDlg : public CDialogImpl<CAboutDlg>
+class CAboutDlg : public CDialogImpl<CAboutDlg>, public CWinDataExchange<CAboutDlg>
 {
 public:
 	enum { IDD = IDD_ABOUTBOX };
@@ -26,6 +26,13 @@ public:
 		COMMAND_ID_HANDLER(IDOK, OnCloseCmd)
 		COMMAND_ID_HANDLER(IDCANCEL, OnCloseCmd)
 	END_MSG_MAP()
+
+   BEGIN_DDX_MAP(CAboutDlg)
+      DDX_CONTROL(IDC_WEBSITE, c_website)
+   END_DDX_MAP()
+
+private:
+   CHyperLink c_website;
 
 // Handler prototypes (uncomment arguments if needed):
 //	LRESULT MessageHandler(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/,

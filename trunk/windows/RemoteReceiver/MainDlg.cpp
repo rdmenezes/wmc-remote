@@ -286,8 +286,19 @@ LRESULT CMainDlg::OnIPAddressChange(WORD /*wNotifyCode*/, WORD /*wID*/,
 LRESULT CMainDlg::OnRemoteSignal(UINT /*uMsg*/, WPARAM /*wParam*/,
       LPARAM lParam, BOOL& /*bHandled*/)
 {
-   if (lParam > 1)
+   bool running = IsMediaCenterRunning();
+
+   if (lParam == 1)
    {
+      if (running)
+      {
+         ShutdownMediaCenter();
+         return 0;
+      }
+   }
+   else if (lParam > 1)
+   {
+      if (!running) { return 0; }
       BringMediaCenterToForeground();
    }
 
@@ -583,5 +594,22 @@ void CMainDlg::BringMediaCenterToForeground()
    if (hwnd)
    {
       SetForegroundWindow(hwnd);
+   }
+}
+
+
+bool CMainDlg::IsMediaCenterRunning()
+{
+   HWND hwnd = FindWindowW(L"eHome Render Window", NULL);
+   return hwnd != NULL;
+}
+
+
+void CMainDlg::ShutdownMediaCenter()
+{
+   HWND hwnd = FindWindowW(L"eHome Render Window", NULL);
+   if (hwnd)
+   {
+      ::PostMessageW(hwnd, WM_CLOSE, 0, 0);
    }
 }

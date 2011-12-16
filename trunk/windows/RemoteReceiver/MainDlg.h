@@ -133,4 +133,6 @@ private:
    static void CALLBACK DelayedSingleClick(HWND, UINT, UINT_PTR, DWORD);
 
    static void BringMediaCenterToForeground();
+   static bool IsMediaCenterRunning();
+   static void ShutdownMediaCenter();
 };
