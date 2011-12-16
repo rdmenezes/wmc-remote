@@ -2,57 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
-        android:layout_marginTop="4dip"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:layout_weight="1" >
 
         <ImageButton
             android:id="@+id/launch_media_center"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/icon" >
-
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/recorded_tv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/applications_television" >
-
-        </ImageButton>
+            android:layout_height="fill_parent"
+            android:src="@drawable/wmc" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="4dip"
-        android:layout_marginTop="4dip"
         android:layout_weight="1" >
 
-        <LinearLayout
-            android:id="@+id/linearLayout3"
+        <ImageButton
+            android:id="@+id/recorded_tv"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
+            android:src="@drawable/applications_television" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.86" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1.5"
-            android:gravity="center_vertical"
             android:orientation="vertical" >
 
             <ImageButton
@@ -60,41 +48,32 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:src="@drawable/dialog_accept" >
-
-            </ImageButton>
+                android:src="@drawable/dialog_accept" />
 
             <ImageButton
                 android:id="@+id/go_back"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:src="@drawable/edit_undo" >
-
-            </ImageButton>
+                android:src="@drawable/edit_undo" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout4"
+            android:id="@+id/linearLayout5"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
-            android:layout_weight="1"
-            android:gravity="center_vertical" >
+            android:layout_weight=".5" >
 
             <ImageButton
                 android:id="@+id/left"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:src="@drawable/go_previous" >
-
-            </ImageButton>
+                android:src="@drawable/go_previous" />
 
             <LinearLayout
-                android:id="@+id/linearLayout5"
-                android:layout_width="fill_parent"
+                android:id="@+id/linearLayout6"
+                android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:orientation="vertical" >
@@ -102,160 +81,117 @@
                 <ImageButton
                     android:id="@+id/up"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/go_up" >
-
-                </ImageButton>
+                    android:src="@drawable/go_up" />
 
                 <ImageButton
                     android:id="@+id/down"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/go_down" >
-
-                </ImageButton>
+                    android:src="@drawable/go_down" />
             </LinearLayout>
 
             <ImageButton
                 android:id="@+id/right"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:src="@drawable/go_next" >
-
-            </ImageButton>
+                android:src="@drawable/go_next" />
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
-        android:layout_marginTop="4dip"
-        android:layout_weight="1"
-        android:gravity="center_vertical" >
-
-        <ImageButton
-            android:id="@+id/mute"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:src="@drawable/stock_volume_mute" >
-
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/volume_down"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:src="@drawable/stock_volume_min" >
-
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/volume_up"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:src="@drawable/stock_volume_max" >
-
-        </ImageButton>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout7"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
-        android:layout_marginTop="4dip"
-        android:layout_weight="1"
-        android:gravity="center_vertical" >
+        android:layout_weight="1" >
 
         <ImageButton
-            android:id="@+id/play"
+            android:id="@+id/mute"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:src="@drawable/media_playback_start" >
-
-        </ImageButton>
+            android:src="@drawable/stock_volume_mute" />
 
         <ImageButton
-            android:id="@+id/stop"
+            android:id="@+id/volume_down"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:src="@drawable/media_playback_stop" >
+            android:src="@drawable/stock_volume_min" />
 
-        </ImageButton>
+        <ImageButton
+            android:id="@+id/volume_up"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/stock_volume_max" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout8"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
-        android:layout_marginTop="4dip"
-        android:layout_weight="1"
-        android:gravity="center_vertical" >
+        android:layout_weight="1" >
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/media_playback_start" />
+
+        <ImageButton
+            android:id="@+id/stop"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/media_playback_stop" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout9"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
 
         <ImageButton
             android:id="@+id/skip_backward"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:src="@drawable/media_skip_backward" >
-
-        </ImageButton>
+            android:src="@drawable/media_skip_backward" />
 
         <ImageButton
             android:id="@+id/skip_forward"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:src="@drawable/media_skip_forward" >
+            android:src="@drawable/media_skip_forward" />
 
-        </ImageButton>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout9"
+        android:id="@+id/LinearLayout10"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="4dip"
-        android:layout_marginLeft="4dip"
-        android:layout_marginRight="4dip"
-        android:layout_marginTop="4dip"
-        android:layout_weight="1"
-        android:gravity="center_vertical" >
+        android:layout_weight="1" >
 
         <ImageButton
             android:id="@+id/rewind"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:src="@drawable/media_seek_backward" >
-
-        </ImageButton>
+            android:src="@drawable/media_seek_backward" />
 
         <ImageButton
             android:id="@+id/fast_forward"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:src="@drawable/media_seek_forward" >
-
-        </ImageButton>
+            android:src="@drawable/media_seek_forward" />
     </LinearLayout>
 
 </LinearLayout>

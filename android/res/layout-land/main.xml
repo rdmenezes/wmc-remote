@@ -7,19 +7,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout10"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.86"
         android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="4dip"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
-            android:layout_marginTop="4dip"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical" >
@@ -29,7 +25,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/icon" />
+                android:src="@drawable/wmc" />
 
             <ImageButton
                 android:id="@+id/recorded_tv"
@@ -44,8 +40,6 @@
             android:id="@+id/linearLayout2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="4dip"
-            android:layout_marginTop="4dip"
             android:layout_weight="1" >
 
             <LinearLayout
@@ -53,8 +47,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="4dip"
-                android:layout_marginRight="4dip"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
                 android:orientation="vertical" >
@@ -79,9 +71,7 @@
                 android:id="@+id/linearLayout4"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginLeft="4dip"
-                android:layout_marginRight="4dip"
-                android:layout_weight="1"
+                android:layout_weight=".5"
                 android:gravity="center_vertical" >
 
                 <ImageButton
@@ -124,14 +114,19 @@
             </LinearLayout>
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.14"
+        android:orientation="vertical" >
+
         <LinearLayout
             android:id="@+id/linearLayout6"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="4dip"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
-            android:layout_marginTop="4dip"
             android:layout_weight="1"
             android:gravity="center_vertical" >
 
@@ -155,26 +150,12 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:src="@drawable/stock_volume_max" />
-
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout11"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/linearLayout7"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="4dip"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
-            android:layout_marginTop="4dip"
             android:layout_weight="1"
             android:gravity="center_vertical" >
 
@@ -198,10 +179,6 @@
             android:id="@+id/linearLayout8"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="4dip"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
-            android:layout_marginTop="4dip"
             android:layout_weight="1"
             android:gravity="center_vertical" >
 
@@ -225,10 +202,6 @@
             android:id="@+id/linearLayout9"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="4dip"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
-            android:layout_marginTop="4dip"
             android:layout_weight="1"
             android:gravity="center_vertical" >
 
