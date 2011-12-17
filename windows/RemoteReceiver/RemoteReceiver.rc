@@ -64,7 +64,7 @@ CAPTION "About"
 FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,130,81,50,14
-    CTEXT           "Remote Receiver\nv1.0 r29\n\nCopyright (C) 2011",IDC_STATIC,25,57,78,32
+    CTEXT           "Remote Receiver\nv1.0 r30\n\nCopyright (C) 2011",IDC_STATIC,25,57,78,32
     ICON            IDR_MAINFRAME,IDC_STATIC,55,26,20,20
     GROUPBOX        "",IDC_STATIC,7,7,115,88
     CTEXT           "Website",IDC_WEBSITE,142,30,27,8
@@ -118,8 +118,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,29
- PRODUCTVERSION 1,0,0,29
+ FILEVERSION 1,0,0,30
+ PRODUCTVERSION 1,0,0,30
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -136,12 +136,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "wmc-remote.googlecode.com"
             VALUE "FileDescription", "Remote Receiver"
-            VALUE "FileVersion", "1.0.0.29"
+            VALUE "FileVersion", "1.0.0.30"
             VALUE "InternalName", "Remote Receiver"
             VALUE "LegalCopyright", "Copyright (C) 2011  wmc-remote.googlecode.com"
             VALUE "OriginalFilename", "RemoteReceiver.exe"
             VALUE "ProductName", "Remote Receiver"
-            VALUE "ProductVersion", "1.0.0.29"
+            VALUE "ProductVersion", "1.0.0.30"
         END
     END
     BLOCK "VarFileInfo"

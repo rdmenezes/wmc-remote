@@ -59,34 +59,38 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>Debug\</IntDir>
-    <OutDir>Debug\</OutDir>
+    <IntDir>Debug32\</IntDir>
+    <OutDir>Debug32\</OutDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\third-party\wtl-svn\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(WTL);$(BOOST);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_LIB32);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IntDir>Debug\</IntDir>
     <OutDir>Debug\</OutDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\third-party\wtl-svn\include;C:\third-party\boost_1_47_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\third-party\boost_1_47_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(WTL);$(BOOST);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_LIB64);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>Release\</IntDir>
-    <OutDir>Release\</OutDir>
+    <IntDir>Release32\</IntDir>
+    <OutDir>Release32\</OutDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(WTL);$(BOOST);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_LIB32);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IntDir>Release\</IntDir>
     <OutDir>Release\</OutDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\third-party\boost_1_47_0;$(IncludePath)</IncludePath>
+    <IncludePath>$(WTL);$(BOOST);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_LIB64);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MinimalRebuild>true</MinimalRebuild>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -97,6 +101,7 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -156,13 +161,13 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\third-party\wtl-svn\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>MinSpace</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>C:\third-party\boost_1_47_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -196,7 +201,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>C:\third-party\boost_1_47_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
