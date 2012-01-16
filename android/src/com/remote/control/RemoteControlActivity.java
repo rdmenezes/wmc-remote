@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.graphics.LightingColorFilter;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -36,6 +35,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import com.remote.control.R.id;
@@ -43,9 +43,6 @@ import com.remote.control.R.id;
 public class RemoteControlActivity extends Activity {
 
    private static final int REPEAT_DELAY = 333;
-
-   private PowerManager _pm;
-   private PowerManager.WakeLock _wl;
 
    private Map<Integer, Byte> _codes = new HashMap<Integer, Byte>();
 
@@ -57,6 +54,7 @@ public class RemoteControlActivity extends Activity {
             sendByte(_codes.get(key));
          }
       }
+      
    };
 
    private RepeatHandler _repeatHandler;
@@ -77,12 +75,12 @@ public class RemoteControlActivity extends Activity {
    };
 
    private Runnable _repeatTask = new Runnable() {
-      
+
       public void run() {
          sendByte(_codes.get(_repeatHandler.getKeycode()));
          _repeatHandler.postDelayed(_repeatTask, REPEAT_DELAY);
       }
-      
+
    };
 
    private OnTouchListener _onTouchListener = new OnTouchListener() {
@@ -122,9 +120,6 @@ public class RemoteControlActivity extends Activity {
 
       setupCodes();
 
-      _pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-      _wl = _pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "RemoteControl");
-
       findViewById(id.launch_media_center).setOnClickListener(_onClickListener);
       findViewById(id.recorded_tv).setOnClickListener(_onClickListener);
       findViewById(id.accept).setOnClickListener(_onClickListener);
@@ -151,15 +146,17 @@ public class RemoteControlActivity extends Activity {
       setupLongClick(id.volume_up);
       setupLongClick(id.skip_backward);
       setupLongClick(id.skip_forward);
-      
-      setBackground(id.play, 0x00000000, 0xdd00dd00);
-      setBackground(id.stop, 0x00000000, 0xdddd0000);
-      setBackground(id.skip_backward, 0x00000000, 0x00dd00dd);
-      setBackground(id.skip_forward, 0x00000000, 0x00dddd00);
+
+      setBackground(id.play, 0x22222222, 0xdd00dd00);
+      setBackground(id.stop, 0x22222222, 0xdddd0000);
+      setBackground(id.skip_backward, 0x22222222, 0x00dd00dd);
+      setBackground(id.skip_forward, 0x22222222, 0x00dddd00);
       setBackground(id.rewind, 0xcccccccc, 0x00dd00dd);
       setBackground(id.fast_forward, 0xcccccccc, 0x00dddd00);
       setBackground(id.accept, 0xcccccccc, 0xdd00dd00);
       setBackground(id.go_back, 0xcccccccc, 0xdddd0000);
+
+      getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
    }
 
    @Override
@@ -173,15 +170,8 @@ public class RemoteControlActivity extends Activity {
          setTitle("Remote Control");
       }
       WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-      wm.setWifiEnabled(true);
-      wakeLock(true);
+      wm.startScan();
       super.onResume();
-   }
-
-   @Override
-   protected void onPause() {
-      wakeLock(false);
-      super.onPause();
    }
 
    private void sendByte(byte b) {
@@ -225,17 +215,9 @@ public class RemoteControlActivity extends Activity {
       _codes.put(new Integer(R.id.fast_forward), new Byte((byte) 17));
    }
 
-   private void wakeLock(boolean acquire) {
-      if (acquire) {
-         _wl.acquire();
-      } else {
-         _wl.release();
-      }
-   }
-   
    private void setBackground(int buttonId, int mul, int add) {
-      ImageButton button = (ImageButton)findViewById(buttonId);
-      //button.getBackground().setColorFilter(filter, PorterDuff.Mode.MULTIPLY);
+      ImageButton button = (ImageButton) findViewById(buttonId);
       button.getBackground().setColorFilter(new LightingColorFilter(mul, add));
    }
+
 }
