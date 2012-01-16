@@ -23,8 +23,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.LightingColorFilter;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -32,12 +36,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.ImageButton;
 
 import com.remote.control.R.id;
 
 public class RemoteControlActivity extends Activity {
 
    private static final int REPEAT_DELAY = 333;
+
+   private PowerManager _pm;
+   private PowerManager.WakeLock _wl;
 
    private Map<Integer, Byte> _codes = new HashMap<Integer, Byte>();
 
@@ -53,27 +61,28 @@ public class RemoteControlActivity extends Activity {
 
    private RepeatHandler _repeatHandler;
 
-   private OnLongClickListener _onLongClickListener =
-         new OnLongClickListener() {
+   private OnLongClickListener _onLongClickListener = new OnLongClickListener() {
 
-            public boolean onLongClick(View v) {
-               Integer key = new Integer(v.getId());
-               if (_codes.containsKey(key)) {
-                  sendByte(_codes.get(key));
-                  _repeatHandler = new RepeatHandler(key);
-                  _repeatHandler.removeCallbacks(_repeatTask);
-                  _repeatHandler.postDelayed(_repeatTask, REPEAT_DELAY);
-               }
-               return false;
-            }
+      public boolean onLongClick(View v) {
+         Integer key = new Integer(v.getId());
+         if (_codes.containsKey(key)) {
+            sendByte(_codes.get(key));
+            _repeatHandler = new RepeatHandler(key);
+            _repeatHandler.removeCallbacks(_repeatTask);
+            _repeatHandler.postDelayed(_repeatTask, REPEAT_DELAY);
+         }
+         return false;
+      }
 
-         };
+   };
 
    private Runnable _repeatTask = new Runnable() {
+      
       public void run() {
          sendByte(_codes.get(_repeatHandler.getKeycode()));
          _repeatHandler.postDelayed(_repeatTask, REPEAT_DELAY);
       }
+      
    };
 
    private OnTouchListener _onTouchListener = new OnTouchListener() {
@@ -93,9 +102,8 @@ public class RemoteControlActivity extends Activity {
    @Override
    public boolean onKeyUp(int keyCode, KeyEvent event) {
       if (keyCode == KeyEvent.KEYCODE_MENU) {
-         Intent intent =
-               new Intent(RemoteControlActivity.this,
-                     LocationPreferenceActivity.class);
+         Intent intent = new Intent(RemoteControlActivity.this,
+               LocationPreferenceActivity.class);
          startActivity(intent);
       }
       return super.onKeyUp(keyCode, event);
@@ -111,7 +119,12 @@ public class RemoteControlActivity extends Activity {
    public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.main);
+
       setupCodes();
+
+      _pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+      _wl = _pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "RemoteControl");
+
       findViewById(id.launch_media_center).setOnClickListener(_onClickListener);
       findViewById(id.recorded_tv).setOnClickListener(_onClickListener);
       findViewById(id.accept).setOnClickListener(_onClickListener);
@@ -138,11 +151,20 @@ public class RemoteControlActivity extends Activity {
       setupLongClick(id.volume_up);
       setupLongClick(id.skip_backward);
       setupLongClick(id.skip_forward);
+      
+      setBackground(id.play, 0x00000000, 0xdd00dd00);
+      setBackground(id.stop, 0x00000000, 0xdddd0000);
+      setBackground(id.skip_backward, 0x00000000, 0x00dd00dd);
+      setBackground(id.skip_forward, 0x00000000, 0x00dddd00);
+      setBackground(id.rewind, 0xcccccccc, 0x00dd00dd);
+      setBackground(id.fast_forward, 0xcccccccc, 0x00dddd00);
+      setBackground(id.accept, 0xcccccccc, 0xdd00dd00);
+      setBackground(id.go_back, 0xcccccccc, 0xdddd0000);
    }
 
    @Override
    protected void onResume() {
-      RemoteControlApplication app = (RemoteControlApplication)getApplication();
+      RemoteControlApplication app = (RemoteControlApplication) getApplication();
       Location location = app.getCurrentLocation();
       if (location != null) {
          String title = "Remote Control - " + location.getName();
@@ -150,11 +172,20 @@ public class RemoteControlActivity extends Activity {
       } else {
          setTitle("Remote Control");
       }
+      WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+      wm.setWifiEnabled(true);
+      wakeLock(true);
       super.onResume();
    }
 
+   @Override
+   protected void onPause() {
+      wakeLock(false);
+      super.onPause();
+   }
+
    private void sendByte(byte b) {
-      RemoteControlApplication app = (RemoteControlApplication)getApplication();
+      RemoteControlApplication app = (RemoteControlApplication) getApplication();
       Location location = app.getCurrentLocation();
       if (location == null) {
          return;
@@ -164,8 +195,8 @@ public class RemoteControlActivity extends Activity {
       byte[] message = { b };
       try {
          InetAddress address = InetAddress.getByName(host);
-         DatagramPacket packet =
-               new DatagramPacket(message, message.length, address, port);
+         DatagramPacket packet = new DatagramPacket(message, message.length,
+               address, port);
          DatagramSocket socket = new DatagramSocket();
          socket.send(packet);
          socket.close();
@@ -175,22 +206,36 @@ public class RemoteControlActivity extends Activity {
    }
 
    private void setupCodes() {
-      _codes.put(new Integer(R.id.launch_media_center), new Byte((byte)1));
-      _codes.put(new Integer(R.id.recorded_tv), new Byte((byte)2));
-      _codes.put(new Integer(R.id.accept), new Byte((byte)3));
-      _codes.put(new Integer(R.id.go_back), new Byte((byte)4));
-      _codes.put(new Integer(R.id.left), new Byte((byte)5));
-      _codes.put(new Integer(R.id.up), new Byte((byte)6));
-      _codes.put(new Integer(R.id.down), new Byte((byte)7));
-      _codes.put(new Integer(R.id.right), new Byte((byte)8));
-      _codes.put(new Integer(R.id.mute), new Byte((byte)9));
-      _codes.put(new Integer(R.id.volume_down), new Byte((byte)10));
-      _codes.put(new Integer(R.id.volume_up), new Byte((byte)11));
-      _codes.put(new Integer(R.id.play), new Byte((byte)12));
-      _codes.put(new Integer(R.id.stop), new Byte((byte)13));
-      _codes.put(new Integer(R.id.skip_backward), new Byte((byte)14));
-      _codes.put(new Integer(R.id.skip_forward), new Byte((byte)15));
-      _codes.put(new Integer(R.id.rewind), new Byte((byte)16));
-      _codes.put(new Integer(R.id.fast_forward), new Byte((byte)17));
+      _codes.put(new Integer(R.id.launch_media_center), new Byte((byte) 1));
+      _codes.put(new Integer(R.id.recorded_tv), new Byte((byte) 2));
+      _codes.put(new Integer(R.id.accept), new Byte((byte) 3));
+      _codes.put(new Integer(R.id.go_back), new Byte((byte) 4));
+      _codes.put(new Integer(R.id.left), new Byte((byte) 5));
+      _codes.put(new Integer(R.id.up), new Byte((byte) 6));
+      _codes.put(new Integer(R.id.down), new Byte((byte) 7));
+      _codes.put(new Integer(R.id.right), new Byte((byte) 8));
+      _codes.put(new Integer(R.id.mute), new Byte((byte) 9));
+      _codes.put(new Integer(R.id.volume_down), new Byte((byte) 10));
+      _codes.put(new Integer(R.id.volume_up), new Byte((byte) 11));
+      _codes.put(new Integer(R.id.play), new Byte((byte) 12));
+      _codes.put(new Integer(R.id.stop), new Byte((byte) 13));
+      _codes.put(new Integer(R.id.skip_backward), new Byte((byte) 14));
+      _codes.put(new Integer(R.id.skip_forward), new Byte((byte) 15));
+      _codes.put(new Integer(R.id.rewind), new Byte((byte) 16));
+      _codes.put(new Integer(R.id.fast_forward), new Byte((byte) 17));
+   }
+
+   private void wakeLock(boolean acquire) {
+      if (acquire) {
+         _wl.acquire();
+      } else {
+         _wl.release();
+      }
+   }
+   
+   private void setBackground(int buttonId, int mul, int add) {
+      ImageButton button = (ImageButton)findViewById(buttonId);
+      //button.getBackground().setColorFilter(filter, PorterDuff.Mode.MULTIPLY);
+      button.getBackground().setColorFilter(new LightingColorFilter(mul, add));
    }
 }
