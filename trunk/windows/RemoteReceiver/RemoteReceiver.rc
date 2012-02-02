@@ -118,8 +118,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,30
- PRODUCTVERSION 1,0,0,30
+ FILEVERSION 1,0,0,35
+ PRODUCTVERSION 1,0,0,35
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -136,12 +136,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "wmc-remote.googlecode.com"
             VALUE "FileDescription", "Remote Receiver"
-            VALUE "FileVersion", "1.0.0.30"
+            VALUE "FileVersion", "1.0.0.35"
             VALUE "InternalName", "Remote Receiver"
-            VALUE "LegalCopyright", "Copyright (C) 2011  wmc-remote.googlecode.com"
+            VALUE "LegalCopyright", "Copyright (C) 2011-2012  wmc-remote.googlecode.com"
             VALUE "OriginalFilename", "RemoteReceiver.exe"
             VALUE "ProductName", "Remote Receiver"
-            VALUE "ProductVersion", "1.0.0.30"
+            VALUE "ProductVersion", "1.0.0.35"
         END
     END
     BLOCK "VarFileInfo"
