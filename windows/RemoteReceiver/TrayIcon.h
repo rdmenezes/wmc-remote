@@ -1,5 +1,5 @@
 // wmc-remote -- An Android-based remote control for Windows Media Center
-// Copyright (C) 2011  http://wmc-remote.googlecode.com
+// Copyright (C) 2011-2012  http://wmc-remote.googlecode.com
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,6 +23,9 @@
 
 const UINT RWM_TRAYICON = 
       RegisterWindowMessageW(L"C771A50A_AD69_4D8C_90FA_A698E1A44C48");
+
+const UINT RWM_TASKBAR_CREATED =
+      RegisterWindowMessageW(L"TaskbarCreated");
 
 
 class SafeIcon : boost::noncopyable

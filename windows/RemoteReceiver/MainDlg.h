@@ -1,5 +1,5 @@
 // wmc-remote -- An Android-based remote control for Windows Media Center
-// Copyright (C) 2011  http://wmc-remote.googlecode.com
+// Copyright (C) 2011-2012  http://wmc-remote.googlecode.com
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@ public:
 		MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
       MESSAGE_HANDLER(RWM_REMOTESIGNAL, OnRemoteSignal)
       MESSAGE_HANDLER(RWM_TRAYICON, OnTrayIcon)
+      MESSAGE_HANDLER(RWM_TASKBAR_CREATED, OnTaskbarCreated)
       MESSAGE_HANDLER(WM_SYSCOMMAND, OnSysCommand)
       COMMAND_HANDLER(IDC_PORT, EN_CHANGE, OnPortChange)
       COMMAND_HANDLER(IDC_LISTEN, BN_CLICKED, OnListenClicked)
@@ -107,6 +108,8 @@ private:
          BOOL& /*bHandled*/);
    LRESULT OnTrayIcon(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/,
          BOOL& /*bHandled*/);
+   LRESULT OnTaskbarCreated(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/,
+         BOOL& /*bHandled*/);
    LRESULT OnSysCommand(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/,
          BOOL& /*bHandled*/);
    LRESULT OnPortKillFocus(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/,
@@ -131,6 +134,7 @@ private:
 
    static CMainDlg* kludge_;
    static void CALLBACK DelayedSingleClick(HWND, UINT, UINT_PTR, DWORD);
+   static void CALLBACK DelayedTrayIconRestore(HWND, UINT, UINT_PTR, DWORD);
 
    static void BringMediaCenterToForeground();
    static bool IsMediaCenterRunning();

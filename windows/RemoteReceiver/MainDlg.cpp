@@ -1,5 +1,5 @@
 // wmc-remote -- An Android-based remote control for Windows Media Center
-// Copyright (C) 2011  http://wmc-remote.googlecode.com
+// Copyright (C) 2011-2012  http://wmc-remote.googlecode.com
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,6 +42,8 @@ static const GUID TRAYGUID =
 { 0xf694c3e4, 0xf901, 0x45ff, { 0x9b, 0x7d, 0x6d, 0xd0, 0x6f, 0x27, 0x8c, 0xa9 } };
 
 const int TIMER_ID_CLICK = 1;
+const int TIMER_ID_RESTORE = 2;
+const int TIMER_DELAY_RESTORE = 7000;
 
 CMainDlg* CMainDlg::kludge_ = NULL;
 
@@ -612,4 +614,21 @@ void CMainDlg::ShutdownMediaCenter()
    {
       ::PostMessageW(hwnd, WM_CLOSE, 0, 0);
    }
+}
+
+
+void CALLBACK CMainDlg::DelayedTrayIconRestore(HWND, UINT, UINT_PTR, DWORD)
+{
+   if (kludge_)
+   {
+      kludge_->trayIcon_->Add(kludge_->m_hWnd);
+   }
+}
+
+
+LRESULT CMainDlg::OnTaskbarCreated(UINT /*uMsg*/, WPARAM /*wParam*/,
+      LPARAM /*lParam*/, BOOL& /*bHandled*/)
+{
+   SetTimer(TIMER_ID_RESTORE, TIMER_DELAY_RESTORE, DelayedTrayIconRestore);
+   return 0;
 }
