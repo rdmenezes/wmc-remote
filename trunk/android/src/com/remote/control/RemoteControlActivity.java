@@ -1,5 +1,5 @@
 // wmc-remote -- An Android-based remote control for Windows Media Center
-// Copyright (C) 2011  http://wmc-remote.googlecode.com
+// Copyright (C) 2011-2012  http://wmc-remote.googlecode.com
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,10 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.LightingColorFilter;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -169,8 +167,6 @@ public class RemoteControlActivity extends Activity {
       } else {
          setTitle("Remote Control");
       }
-      WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-      wm.startScan();
       super.onResume();
    }
 
